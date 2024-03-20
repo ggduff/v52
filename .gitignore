@@ -1,14 +1,20 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+*.py[cod]
+*$py.class
 
-# Virtual environments
+# Virtual environment
 venv/
-.env
 
-# Flask files
+# Environment configuration files
+.env
+.env.local
+.env.*.local
+
+# Flask instance folder
 instance/
 
-# Python distribution / packaging
+# Distribution / packaging
 *.egg-info/
 dist/
 build/
@@ -17,30 +23,23 @@ build/
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints/
 
-# VS Code settings
+# Editor specific files
 .vscode/
+.idea/
+*.sublime-workspace
+*.swp
+*.swo
 
 # Node modules and build directory for React frontend
-frontend/node_modules/
-frontend/build/
+/frontend/node_modules/
+/frontend/build/
 
 # Logs and databases
 *.log
 *.sqlite
+*.sqlite3
 *.db
 
-# Operating System files
+# System files
 .DS_Store
 Thumbs.db
-
-# Local env files
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# Editor directories and files
-.idea/
-*.swp
-*.swo
-*.sublime-workspace

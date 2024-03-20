@@ -1,0 +1,8 @@
+Flask
+python-dotenv
+requests
+Flask-Cors
+langchain
+beautifulsoup4
+chromadb
+faiss-cpu

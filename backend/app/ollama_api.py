@@ -37,4 +37,7 @@ class OllamaAPI:
             return response_json
         except requests.RequestException as e:
             logging.error(f"Error interacting with Ollama: {e}")
-            return None
+            if e.response:
+                logging.error(f"Response status code: {e.response.status_code}")
+                logging.error(f"Response text: {e.response.text}")
+            return {'error': str(e), 'status_code': e.response.status_code if e.response else 'N/A', 'response': e.response.text if e.response else 'No response'}

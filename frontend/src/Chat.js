@@ -22,13 +22,25 @@ const Chat = () => {
         const result = await res.json();
         if (res.ok) {
           setResponse(result.message?.content || 'No response');
+          // Optionally, you can add an alert here if you want to confirm successful messages
         } else {
           setResponse(result.error || 'Error fetching response');
+          alert(`API Error: ${result.error || 'Unknown error'} (Status: ${res.status})`);
         }
-      } catch (error) {
+    } catch (error) {
         console.error('Error fetching response:', error);
         setResponse('Error fetching response');
-      }
+
+        // Here we provide more detailed error information
+        let errorMessage = 'Error fetching response: ';
+        if (error instanceof TypeError) {
+            errorMessage += 'There might be a problem with the network or the URL you tried to reach. Please check your internet connection and the API URL.';
+        } else {
+            errorMessage += 'An unexpected error occurred. This could be due to various reasons such as server issues, network problems, or invalid configurations.';
+        }
+
+        alert(errorMessage); // Displaying the enhanced error message
+    }
   };
 
   return (

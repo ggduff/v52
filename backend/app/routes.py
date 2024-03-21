@@ -1,9 +1,9 @@
 from flask import Blueprint, request, jsonify
 from .ollama_api import OllamaAPI
 
-bp = Blueprint('routes', __name__)
+chat_blueprint = Blueprint('routes', __name__)
 
-@bp.route('/chat', methods=['POST'])
+@chat_blueprint.route('/chat', methods=['POST'])
 def chat():
     data = request.json
     model_choice = data.get('model', 'standard')  # Default to 'standard' if not provided

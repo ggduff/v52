@@ -11,7 +11,7 @@ const Chat = () => {
 
     try {
         console.log('Sending request:', data);
-        const res = await fetch('http://localhost:2152/chat', {
+        const res = await fetch('http://v51.thinkhuge.net:2152/chat', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -28,18 +28,20 @@ const Chat = () => {
           alert(`API Error: ${result.error || 'Unknown error'} (Status: ${res.status})`);
         }
     } catch (error) {
-        console.error('Error fetching response:', error);
-        setResponse('Error fetching response');
-
-        // Here we provide more detailed error information
-        let errorMessage = 'Error fetching response: ';
-        if (error instanceof TypeError) {
-            errorMessage += 'There might be a problem with the network or the URL you tried to reach. Please check your internet connection and the API URL.';
-        } else {
-            errorMessage += 'An unexpected error occurred. This could be due to various reasons such as server issues, network problems, or invalid configurations.';
-        }
-
-        alert(errorMessage); // Displaying the enhanced error message
+      console.error('Error fetching response:', error);
+      setResponse('Error fetching response');
+  
+      let errorMessage = `Error fetching response: ${error.message}. `;
+  
+      if (error instanceof TypeError) {
+          errorMessage += 'There might be a problem with the network or the URL you tried to reach. Please check your internet connection and the API URL. ';
+      } else {
+          errorMessage += 'An unexpected error occurred. This could be due to various reasons such as server issues, network problems, or invalid configurations. ';
+      }
+  
+      errorMessage += `Attempted to reach API URL: http://localhost:2152/chat with prompt: ${prompt}`;
+  
+      alert(errorMessage); // Displaying the enhanced error message
     }
   };
 

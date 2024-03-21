@@ -8,7 +8,7 @@ import logging
 import json
 class OllamaAPI:
     def __init__(self):
-        self.base_url = "http://laxgpu.thinkhuge.net:11434"
+        self.base_url = "http://laxgpu.thinkhuge.net:11434/api"
         self.model = ""  # Initialize model attribute
 
     def set_model(self, value):
@@ -17,6 +17,8 @@ class OllamaAPI:
             self.model = "mistral"
         elif value == "enhanced":
             self.model = "mixtral"
+        else:
+            self.model = "mistral"
 
     def interact(self, prompt, stream=False):
         """Interacts with the Ollama model and returns responses."""

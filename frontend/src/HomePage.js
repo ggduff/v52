@@ -4,7 +4,7 @@ import Chat from './Chat';
 
 const HomePage = () => {
   return (
-    <div className="bg-dark-primary flex flex-col text-dark-text min-h-screen">
+    <div className="bg-gray-900 flex flex-col text-dark-text min-h-screen"> {/* Updated to bg-gray-900 */}
       <nav className="flex justify-between items-center p-4">
         {/* Logo and v51 */}
         <div className="flex items-center">

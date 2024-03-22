@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 body {
+  background-color: #1F2937;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -14,4 +15,30 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Custom Styles for Chat Component */
+.chat-container {
+  @apply bg-gray-800 text-white p-4 rounded-lg shadow;
+}
+
+.message {
+  @apply p-2 m-2 bg-gray-700 rounded-lg;
+}
+
+.message code {
+  @apply bg-gray-600 text-green-300 p-2 rounded;
+}
+
+.copy-btn {
+  @apply ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded inline-flex items-center;
+}
+
+/* Styling for toast notifications */
+.toast-container {
+  @apply bottom-0 right-0 m-4;
+}
+
+.toast-message {
+  @apply text-sm;
 }

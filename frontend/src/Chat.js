@@ -40,15 +40,15 @@ const Chat = () => {
     if (typeof message.content === 'string') {
       const codeBlockRegex = /```(.*?)\n(.*?)```/gs;
       const parsedContent = [];
-
+  
       let lastIndex = 0;
       let match;
-
+  
       while ((match = codeBlockRegex.exec(message.content)) !== null) {
         const language = match[1].trim();
         const code = match[2];
         const textBefore = message.content.slice(lastIndex, match.index);
-
+  
         if (textBefore) {
           parsedContent.push(
             <div key={lastIndex} className="message-content p-2">
@@ -56,9 +56,9 @@ const Chat = () => {
             </div>
           );
         }
-
+  
         parsedContent.push(
-          <div key={match.index} className="code-container relative">
+          <div key={match.index} className="code-container relative max-w-full overflow-auto">
             <div className="code-title bg-gray-700 text-gray-200 px-4 py-1 text-sm rounded-t-md">{language}</div>
             <SyntaxHighlighter
               language={language}
@@ -100,10 +100,10 @@ const Chat = () => {
             </CopyToClipboard>
           </div>
         );
-
+  
         lastIndex = codeBlockRegex.lastIndex;
       }
-
+  
       const textAfter = message.content.slice(lastIndex);
       if (textAfter) {
         parsedContent.push(
@@ -112,7 +112,7 @@ const Chat = () => {
           </div>
         );
       }
-
+  
       return parsedContent;
     } else {
       return message.content;
@@ -169,7 +169,7 @@ const Chat = () => {
         <div className="max-w-screen-xl mx-auto flex justify-between items-center">
           <div className="flex items-center">
             <span className="text-white text-2xl mr-4">🌐</span>
-            <h1 className="text-3xl font-bold text-gray-400">Chat with HugeThink</h1>
+            <h1 className="text-3xl font-bold text-gray-300">Chat with HugeThink</h1>
           </div>
           <div className="relative">
             <span className="text-white text-2xl cursor-pointer" onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -230,7 +230,7 @@ const Chat = () => {
         </div>
       </form>
       <div
-        className={`fixed right-0 top-20 bottom-32 w-80 bg-gray-700 p-6 transition-transform duration-300 ease-in-out transform border-l border-gray-700 ${
+        className={`fixed right-0 top-20 bottom-32 w-80 bg-dark-charcoal p-6 transition-transform duration-300 ease-in-out transform border-l border-gray-700 ${
           isSidePanelOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >

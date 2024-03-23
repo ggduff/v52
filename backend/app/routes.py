@@ -10,7 +10,7 @@ def chat():
     prompt = data.get('prompt')
     document_url = data.get('document_url')  # Get the document URL from the request data
 
-    ollama_api = OllamaAPI(base_url="http://laxgpu.thinkhuge.net:11434", model="mistral")
+    ollama_api = OllamaAPI(base_url="http://laxgpu.thinkhuge.net:11434", model="mistral", temperature=0.7, top_p=1.0)
 
     if document_url:
         # Load the document from the provided URL

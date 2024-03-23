@@ -31,7 +31,7 @@ code {
 }
 
 .copy-btn {
-  @apply ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded inline-flex items-center;
+  @apply ml-2 bg-gray-600 bg-opacity-75 hover:bg-gray-500 text-gray-300 hover:text-white font-bold py-1 px-2 rounded inline-flex items-center transition-colors duration-300;
 }
 
 /* Styling for toast notifications */
@@ -41,4 +41,35 @@ code {
 
 .toast-message {
   @apply text-sm;
+}
+
+.user-message {
+  text-align: left;
+}
+
+/* Styling for ReactMarkdown */
+.message-content p {
+  margin-bottom: 1rem;
+}
+
+.message-content ul,
+.message-content ol {
+  margin-bottom: 1rem;
+  padding-left: 2rem;
+}
+
+.message-content ul {
+  list-style-type: disc;
+}
+
+.message-content ol {
+  list-style-type: decimal;
+}
+
+.message-content li {
+  margin-bottom: 0.5rem;
+}
+
+.bg-dark-charcoal {
+  background-color: #131313; /* Dark charcoal color */
 }

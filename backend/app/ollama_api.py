@@ -40,7 +40,7 @@ def is_valid_json(text):
         return False
 
 class OllamaAPI:
-    def __init__(self, base_url, model="mistral"):
+    def __init__(self, base_url, model="dolphin-mixtral"):
         self.base_url = base_url
         self.model = model
         self.llm = Ollama(base_url=base_url, model=model)

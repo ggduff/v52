@@ -65,22 +65,15 @@ Flask runs on the backend at (ex: http://localhost:2152)
 
 ## Upgrade Node.js to latest version (v20.x as of 3/24/2024)
     https://deb.nodesource.com/
+
     #Remove conflicting packages if necessary
     sudo apt-get remove libnode-dev
     sudo apt-get clean
     sudo apt-get update
     sudo apt-get install -y nodejs
+
     node -v
-    #v20.11.1
+    #check version (v20.11.1)
+
     #Install dependencies from frontend/package.json
     npm install
-
-## React
-	npm install react-markdown
-	npm install remark-gfm
-	npm install html-react-parser
-
-# TAILWINDCSS
-    npm install -D tailwindcss
-    npx tailwindcss init
-    npx tailwindcss init -p

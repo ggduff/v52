@@ -56,12 +56,10 @@ Flask runs on the backend at (ex: http://localhost:2152)
     #Then, run:
 	pip install -r requirements.txt
 
-
-## Replace port in run.py
+## Replace port in run.py, make different from frontend port
     vi v52/backend/run.py
     #Replace port below
-	flask run --host=0.0.0.0 --port=(####)
-
+	flask run --host=0.0.0.0 --port=2152
 
 ## Upgrade Node.js to latest version (v20.x as of 3/24/2024)
     https://deb.nodesource.com/

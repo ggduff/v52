@@ -6,3 +6,4 @@ langchain
 beautifulsoup4
 chromadb
 faiss-cpu
+authlib

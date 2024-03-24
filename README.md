@@ -27,13 +27,14 @@ https://github.com/ggduff/v52
     │
     └── .gitignore               # Specifies intentionally untracked files
 
-We access our app on the web at http://v51.thinkhuge.net:2153/
-Flash runs on the backend at http://localhost:2152 and is not available from external IPs.
+We access our app on the web at (ex: http://v51.thinkhuge.net:2153)
+
+Flask runs on the backend at (ex: http://localhost:2152)
 
 ###############################################################################
 ## Set up project directory
 	mkdir -p /srv/user-dev/v52
-      chown -R username:staff /srv/user-dev/
+    chown -R username:staff /srv/user-dev/
 ## Clone Your GitHub Repository
 	cd /srv/user-dev/v52
 	git clone https://github.com/ggduff/v52.git .
@@ -50,29 +51,29 @@ Flash runs on the backend at http://localhost:2152 and is not available from ext
 ## Set up Backend with Flask
 	python3 -m venv venv
 	source venv/bin/activate
-      cd backend
+    cd backend
 
-Then, run:
+    #Then, run:
 	pip install -r requirements.txt
 
 
 ## Replace port in run.py
-      Vi v52/backend/run.py
-      #Replace port below
+    vi v52/backend/run.py
+    #Replace port below
 	flask run --host=0.0.0.0 --port=(####)
 
 
 ## Upgrade Node.js to latest version (v20.x as of 3/24/2024)
-      https://deb.nodesource.com/
-      #Remove conflicting packages if necessary
-      sudo apt-get remove libnode-dev
-      sudo apt-get clean
-      sudo apt-get update
-      sudo apt-get install -y nodejs
-      node -v
-      #v20.11.1
-      #Install dependencies from frontend/package.json
-      npm install
+    https://deb.nodesource.com/
+    #Remove conflicting packages if necessary
+    sudo apt-get remove libnode-dev
+    sudo apt-get clean
+    sudo apt-get update
+    sudo apt-get install -y nodejs
+    node -v
+    #v20.11.1
+    #Install dependencies from frontend/package.json
+    npm install
 
 React
 	npm install react-markdown
@@ -80,6 +81,6 @@ React
 	npm install html-react-parser
 
 # TAILWINDCSS
-     npm install -D tailwindcss
-     npx tailwindcss init
-     npx tailwindcss init -p
+    npm install -D tailwindcss
+    npx tailwindcss init
+    npx tailwindcss init -p

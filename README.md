@@ -75,7 +75,7 @@ Flask runs on the backend at (ex: http://localhost:2152)
     #Install dependencies from frontend/package.json
     npm install
 
-React
+## React
 	npm install react-markdown
 	npm install remark-gfm
 	npm install html-react-parser

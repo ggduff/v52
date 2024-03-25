@@ -7,6 +7,7 @@ import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { GrayUserIcon, GreenUserIcon } from './HeroIcons';
+import FileUploadModal from './FileUploadModal';
 
 const Chat = () => {
   const [prompt, setPrompt] = useState('');
@@ -16,6 +17,7 @@ const Chat = () => {
   const textareaRef = useRef(null);
   const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isFileUploadModalOpen, setIsFileUploadModalOpen] = useState(false);
 
   const adjustTextareaHeight = () => {
     if (textareaRef.current) {
@@ -23,6 +25,14 @@ const Chat = () => {
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
       textareaRef.current.style.maxHeight = '120px'; // Set the maximum height to 10 lines (assuming line height of 12px)
     }
+  };
+
+  const openFileUploadModal = () => {
+    setIsFileUploadModalOpen(true);
+  };
+
+  const closeFileUploadModal = () => {
+    setIsFileUploadModalOpen(false);
   };
 
   const scrollToBottom = () => {
@@ -176,25 +186,25 @@ const Chat = () => {
         <div className="max-w-screen-xl mx-auto flex justify-between items-center">
           <div className="flex items-center">
             <span className="text-green-300 text-xl mr-4">🌐 v51</span>
-            <h1 className="text-3xl font-bold text-gray-300">Chat with HugeThink</h1>
+            <span className="text-2xl font-bold text-gray-300">HugeThink</span>
           </div>
           <div className="relative">
             <span className="text-white text-2xl cursor-pointer" onClick={() => setIsMenuOpen(!isMenuOpen)}>
               <GreenUserIcon />
             </span>
             {isMenuOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-gray-400 rounded-md shadow-lg py-1 z-10">
-              <a href="/logout" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">
-                Logout
-              </a>
-              <a href="/admin" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">
-                Admin
-              </a>
-              <a href="/about" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">
-                About
-              </a>
-            </div>
-          )}
+              <div className="absolute right-0 mt-2 w-48 bg-gray-500 rounded-md shadow-lg py-1 z-10">
+                <a href="/logout" className="block px-4 py-2 text-sm text-gray-800 hover:bg-green-600">
+                  Logout
+                </a>
+                <a href="/admin" className="block px-4 py-2 text-sm text-gray-800 hover:bg-green-600">
+                  Admin
+                </a>
+                <a href="/about" className="block px-4 py-2 text-sm text-gray-800 hover:bg-green-600">
+                  Settings
+                </a>
+              </div>
+            )}
           </div>
         </div>
       </header>
@@ -245,18 +255,161 @@ const Chat = () => {
         </div>
       </form>
       <div
-        className={`fixed right-0 top-20 bottom-32 w-80 bg-dark-charcoal p-6 transition-transform duration-300 ease-in-out transform border-l border-gray-700 ${
+        className={`fixed right-0 top-0 bottom-0 w-80 bg-dark-charcoal p-6 transition-transform duration-300 ease-in-out transform border-l border-gray-700 z-20 ${
           isSidePanelOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        {/* Side panel content */}
-      </div>
-      <button
-        className="fixed right-0 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-l-md focus:outline-none"
-        onClick={() => setIsSidePanelOpen(!isSidePanelOpen)}
-      >
-        {isSidePanelOpen ? '>' : '<'}
-      </button>
+        <button
+          className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-full bg-gray-700 text-white p-2 rounded-l-md focus:outline-none"
+          onClick={() => setIsSidePanelOpen(!isSidePanelOpen)}
+        >
+          {isSidePanelOpen ? '>' : '<'}
+        </button>
+        <div className="mb-6">
+          <h3 className="text-lg font-semibold text-green-400 mb-2">Application Status</h3>
+          <div className="bg-gray-800 p-4 rounded-md">
+            <p className="text-gray-300">Mon, 25 Mar 2024</p>
+            <p className="text-gray-300"><span className="text-gray-400">15:59:53 UTC</span></p>
+            <p className="text-gray-300">v51 Status: <span className="text-green-400">Active</span></p>
+            <p className="text-gray-300">Uptime: <span className="text-gray-400">2h 30m</span></p>
+            
+            
+          </div>
+        </div>
+        <div className="mb-6">
+          <h3 className="text-lg font-semibold text-green-400 mb-2">Performance Information</h3>
+          <div className="bg-gray-800 p-4 rounded-md">
+            <p className="text-gray-300">Avg CPU Usage: <span className="text-gray-400">25%</span></p>
+            <p className="text-gray-300">Avg GPU Usage: <span className="text-gray-400">19.2 TFLOPS</span></p>
+            <p className="text-gray-300">Memory Usage: <span className="text-gray-400">1.2 GB</span></p>
+          </div>
+        </div>
+        <div className="mb-6">
+          <h3 className="text-lg font-semibold text-green-400 mb-2">Advanced Prompt Settings</h3>
+          <div className="bg-gray-800 p-4 rounded-md">
+            <div className="flex items-center">
+              <input type="checkbox" id="enhancedMode" className="mr-2" />
+              <label htmlFor="enhancedMode" className="text-gray-300">Enhanced Mode</label>
+            </div>
+            <div className="flex items-center">
+              <input type="checkbox" id="code" className="mr-2" />
+              <label htmlFor="code" className="text-gray-300">Code Emphasis</label>
+            </div>
+            <div className="flex items-center">
+              <input type="checkbox" id="temperature" className="mr-2" />
+              <label htmlFor="temperature" className="text-gray-300">Temperature</label>
+            </div>
+          </div>
+        </div>
+        <div className="mb-6">
+          <h3 className="text-lg font-semibold text-green-400 mb-2">Live Connections</h3>
+          <div className="bg-gray-800 p-4 rounded-md">
+            <div className="flex items-center">
+              <input type="checkbox" id="freshdesk" className="mr-2" />
+              <label htmlFor="freshdesk" className="text-gray-300">Freshdesk</label>
+            </div>
+            <div className="flex items-center">
+              <input type="checkbox" id="whmcs" className="mr-2" />
+              <label htmlFor="whmcs" className="text-gray-300">WHMCS</label>
+            </div>
+            <div className="flex items-center">
+              <input type="checkbox" id="brokerpanel" className="mr-2" />
+              <label htmlFor="brokerpanel" className="text-gray-300">Broker Panel</label>
+            </div>
+            <div className="flex items-center">
+              <input type="checkbox" id="solus" className="mr-2" />
+              <label htmlFor="solus" className="text-gray-300">Solus VM</label>
+            </div>
+            <div className="flex items-center">
+              <input type="checkbox" id="openstack" className="mr-2" />
+              <label htmlFor="openstack" className="text-gray-300">Openstack</label>
+            </div>
+            <div className="flex items-center">
+              <input type="checkbox" id="github" className="mr-2" />
+              <label htmlFor="github" className="text-gray-300">Github</label>
+            </div>
+          </div>
+        </div>
+
+        <div className="mb-6">
+          <h3 className="text-lg font-semibold text-green-400 mb-2">Session Assistants</h3>
+          <div className="bg-gray-800 p-4 rounded-md">
+            <div className="flex items-center">
+              <input type="checkbox" id="customerAssistant" className="mr-2" />
+              <label htmlFor="customerAssistant" className="text-gray-300">Support Assistant</label>
+            </div>
+            <div className="flex items-center">
+              <input type="checkbox" id="customerAssistant" className="mr-2" />
+              <label htmlFor="customerAssistant" className="text-gray-300">Marketing Assistant</label>
+            </div>
+            <div className="flex items-center">
+              <input type="checkbox" id="infraAssistant" className="mr-2" />
+              <label htmlFor="infraAssistant" className="text-gray-300">Infra Assistant</label>
+            </div>
+            <div className="flex items-center">
+              <input type="checkbox" id="codeAssistant" className="mr-2" />
+              <label htmlFor="codeAssistant" className="text-gray-300">Dev/Code Assistant</label>
+            </div>
+            <div className="flex items-center">
+              <input type="checkbox" id="accountingAssistant" className="mr-2" />
+              <label htmlFor="accountingAssistant" className="text-gray-300">Accounting Assistant</label>
+            </div>
+            <div className="flex items-center">
+              <input type="checkbox" id="reportsAssistant" className="mr-2" />
+              <label htmlFor="reportsAssistant" className="text-gray-300">Reports Assistant</label>
+            </div>
+            <div className="flex items-center">
+              <input type="checkbox" id="strategyAssistant" className="mr-2" />
+              <label htmlFor="strategyAssistant" className="text-gray-300">Strategy Assistant</label>
+            </div>
+          </div>
+        </div>
+
+        <div className="mb-6">
+          <h3 className="text-lg font-semibold text-green-400 mb-2">Context Documents</h3>
+          <div className="bg-gray-800 p-4 rounded-md">
+            <button
+              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+              onClick={openFileUploadModal}
+            >
+              Manage Files
+            </button>
+          </div>
+        </div>
+
+        <div className="mb-6">
+          <h3 className="text-lg font-semibold text-green-400 mb-2">Model Tuning</h3>
+          <div className="bg-gray-800 p-4 rounded-md">
+            <nav>
+              <ul className="space-y-2">
+                <li className="hover:bg-blue-700">
+                  <a href="#" className="block px-4 py-2 bg-gray-600 text-white rounded-md hover:text-gray-200">Persona Tuning</a>
+                </li>
+                <li className="hover:bg-blue-700">
+                  <a href="#" className="block px-4 py-2 bg-gray-600 text-white rounded-md hover:text-gray-200">Support Model</a>
+                </li>
+                <li className="hover:bg-blue-700">
+                  <a href="#" className="block px-4 py-2 bg-gray-600 text-white rounded-md hover:text-gray-200">Infra Model</a>
+                </li>
+                <li className="hover:bg-blue-700">
+                  <a href="#" className="block px-4 py-2 bg-gray-600 text-white rounded-md hover:text-gray-200">Marketing Model</a>
+                </li>
+                <li className="hover:bg-blue-700">
+                  <a href="#" className="block px-4 py-2 bg-gray-600 text-white rounded-md hover:text-gray-200">Code Model</a>
+                </li>
+                <li className="hover:bg-blue-700">
+                  <a href="#" className="block px-4 py-2 bg-gray-600 text-white rounded-md hover:text-gray-200">Forex Model</a>
+                </li>
+                <li className="hover:bg-orange-300">
+                  <a href="#" className="block px-4 py-2 bg-orange-500 text-black rounded-md hover:text-gray-800">v51 System Model</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>    
+
+      <FileUploadModal isOpen={isFileUploadModalOpen} onClose={closeFileUploadModal} />
       <ToastContainer />
     </div>
   );

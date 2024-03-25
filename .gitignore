@@ -6,6 +6,8 @@ backend/.pytest_cache/
 backend/.mypy_cache/
 backend/.coverage
 backend/.flaskenv
+backend/uploads/
+backend/files/
 
 # Virtual environment
 venv/

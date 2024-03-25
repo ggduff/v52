@@ -4,6 +4,9 @@ from authlib.integrations.flask_client import OAuth
 import os
 from .ollama_api import OllamaAPI
 
+UPLOAD_FOLDER = '/srv/duff-dev/v52/backend/uploads'
+FILES_FOLDER = '/srv/duff-dev/v52/backend/files'
+
 chat_blueprint = Blueprint('routes', __name__, static_folder='../frontend/build', static_url_path='/')
 
 @chat_blueprint.record_once
@@ -77,6 +80,29 @@ def chat():
     else:
         return jsonify({'error': 'Failed to get response from Ollama API.'}), 500
 
+@chat_blueprint.route('/upload', methods=['POST'])
+def upload_files():
+    uploaded_files = request.files.getlist('files')  # Get the list of uploaded files from the request
+    for file in uploaded_files:
+        if file and allowed_file(file.filename):
+            filename = file.filename
+            file.save(os.path.join(UPLOAD_FOLDER, filename))
+    return jsonify({'message': 'Files uploaded successfully'}), 200
+
+@chat_blueprint.route('/files', methods=['GET'])
+def get_files():
+    files = os.listdir(UPLOAD_FOLDER)  # Change this to UPLOAD_FOLDER instead of FILES_FOLDER
+    return jsonify({'files': files}), 200
+
+@chat_blueprint.route('/files/<path:filename>', methods=['DELETE'])
+def delete_file(filename):
+    file_path = os.path.join(UPLOAD_FOLDER, filename)
+    if os.path.exists(file_path):
+        os.remove(file_path)
+        return jsonify({'message': 'File deleted successfully'}), 200
+    else:
+        return jsonify({'error': 'File not found'}), 404
+    
 @chat_blueprint.route('/', defaults={'path': ''})
 @chat_blueprint.route('/<path:path>')
 def serve(path):
@@ -84,5 +110,9 @@ def serve(path):
         return send_from_directory(chat_blueprint.static_folder, path)
     elif 'user' not in session:
         return send_from_directory(chat_blueprint.static_folder, path)
-        #return redirect(url_for('.login'))
+    # return redirect(url_for('.login'))
     return send_from_directory(chat_blueprint.static_folder, 'index.html')
+
+def allowed_file(filename):
+    ALLOWED_EXTENSIONS = {'txt', 'json', 'csv', 'pdf'}
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS

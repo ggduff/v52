@@ -7,25 +7,34 @@ https://github.com/ggduff/v52
 
     v52/
     │
-    ├── backend/                 # All backend-related files
-    │   ├── app/                 # Flask application
-    │   │   ├── __init__.py      # Initializes Flask app
-    │   │   ├── models.py        # Defines data models
-    │   │   └── routes.py        # API routes
-    │   ├── venv/                # Python virtual environment
-    │   ├── .flaskenv            # Flask environment variables
-    │   ├── requirements.txt     # Python dependencies
-    │   ├── run.py               # Entry point for Flask application
-    │   └── templates/           # Flask HTML templates (login page)
+    ├── backend/                 
+    │   ├── app/                 
+    │   │   ├── __init__.py      
+    │   │   ├── models.py        
+    │   │   ├── routes.py        
+    │   │   └── ollama_api.py    
+    │   ├── uploads/             # Directory to store uploaded files
+    │   ├── files/               # Directory to store processed files
+    │   ├── venv/                
+    │   ├── .flaskenv            
+    │   ├── requirements.txt     
+    │   ├── run.py               
+    │   └── templates/           
+    │       └── login.html       
     │
-    ├── frontend/                # All frontend-related files
-    │   ├── public/              # Public assets
-    │   ├── src/                 # React application source
-    │   ├── .env                 # React environment variables
-    │   ├── package.json         # npm dependencies
-    │   └── tailwind.config.js   # Tailwind CSS configuration
+    ├── frontend/                
+    │   ├── public/              
+    │   ├── src/                 
+    │   │   ├── App.js           
+    │   │   ├── Chat.js          
+    │   │   ├── HomePage.js      
+    │   │   ├── index.css        
+    │   │   └── index.js         
+    │   ├── .env                 
+    │   ├── package.json         
+    │   └── tailwind.config.js   
     │
-    └── .gitignore               # Specifies intentionally untracked files
+    └── .gitignore
 
 We access our app on the web at (ex: http://v51.thinkhuge.net:2153)
 

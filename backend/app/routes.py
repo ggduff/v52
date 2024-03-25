@@ -17,6 +17,10 @@ def on_register(state):
         client_kwargs={'scope': 'openid email profile'},
     )
 
+@chat_blueprint.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
 @chat_blueprint.route('/login')
 def login():
     if 'user' in session:

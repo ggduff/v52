@@ -6,6 +6,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { GrayUserIcon, GreenUserIcon } from './HeroIcons';
 
 const Chat = () => {
   const [prompt, setPrompt] = useState('');
@@ -21,6 +22,12 @@ const Chat = () => {
       textareaRef.current.style.height = 'auto';
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
       textareaRef.current.style.maxHeight = '120px'; // Set the maximum height to 10 lines (assuming line height of 12px)
+    }
+  };
+
+  const scrollToBottom = () => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
     }
   };
 
@@ -168,12 +175,12 @@ const Chat = () => {
       <header className="bg-dark-charcoal p-6 fixed top-0 left-0 right-0 z-10">
         <div className="max-w-screen-xl mx-auto flex justify-between items-center">
           <div className="flex items-center">
-            <span className="text-white text-2xl mr-4">🌐</span>
+            <span className="text-green-300 text-xl mr-4">🌐 v51</span>
             <h1 className="text-3xl font-bold text-gray-300">Chat with HugeThink</h1>
           </div>
           <div className="relative">
             <span className="text-white text-2xl cursor-pointer" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-              👤
+              <GreenUserIcon />
             </span>
             {isMenuOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-gray-400 rounded-md shadow-lg py-1 z-10">
@@ -191,7 +198,7 @@ const Chat = () => {
           </div>
         </div>
       </header>
-      <div className="flex-grow w-full overflow-y-auto pt-28 pb-40 px-8" ref={chatContainerRef}>
+      <div className="flex-grow w-full overflow-n-auto pt-28 pb-40 px-8" ref={chatContainerRef}>
         <div className="max-w-screen-xl mx-auto">
           {messages.map((message, index) => (
             <div key={index} className={`mb-6 ${message.type === 'user' ? 'flex justify-end' : 'flex justify-start'}`}>
@@ -205,6 +212,14 @@ const Chat = () => {
             </div>
           ))}
         </div>
+        <button
+          className="scroll-to-bottom-btn"
+          onClick={scrollToBottom}
+          aria-label="Scroll to bottom"
+          title="Scroll to latest message"
+        >
+          ⬇️
+        </button>
       </div>
       <form onSubmit={handleSubmit} className="bg-dark-charcoal p-8 fixed bottom-0 left-0 right-0">
         <div className="max-w-screen-xl mx-auto flex gap-6">

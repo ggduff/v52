@@ -73,3 +73,28 @@ code {
 .bg-dark-charcoal {
   background-color: #131313; /* Dark charcoal color */
 }
+
+/* Styles for the scroll-to-bottom button */
+.scroll-to-bottom-btn {
+  position: fixed;
+  bottom: 100px; /* Position it 100px above the top of the send button */
+  right: 20px;
+  background-color: rgba(131, 131, 131, 0.8); /* A transparent background */
+  color: rgb(114, 251, 176);
+  border: none;
+  border-radius: 50%;
+  padding: 0.5em;
+  cursor: pointer;
+  z-index: 10; /* Higher than the chat but lower than modals/dialogs */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s;
+}
+
+.scroll-to-bottom-btn:hover {
+  background-color: rgb(50, 207, 44); /* Less transparent on hover */
+}
+
+/* Ensure button does not block content */
+.chat-container {
+  padding-bottom: 150px; /* Extra space at the bottom, adjust as needed */
+}
